@@ -13,8 +13,8 @@ const I={
  "refri": "img/refri.jpg"
 };
 const VID={"maminha":"video/maminha.mp4","camarao":"video/camarao.mp4"};
-const PA=(p)=>`Pão de alho de 15 cm, recheado com 100 g de ${p}, blend cremoso de queijo minas e muçarela e nossa pasta de alho, feita com receita própria. Pão levemente gratinado, para uma casquinha dourada e irresistível.`;
-const pao=(id,n,pr,img,top,p)=>({id,cat:'paes',n,pr,img,top,d:'Recheado com 100 g de '+p+', queijo minas e muçarela e pasta de alho da casa.',full:PA(p),sp:[['Tamanho','15 cm'],['Proteína','100 g de '+p],['Queijos','Minas e muçarela'],['Finalização','Levemente gratinado']]});
+const PA=(p)=>`Pão de alho de 15 cm, recheado com 100 g de ${p}, blend de queijo e nossa pasta de alho, feita com receita própria. Pão levemente gratinado, para uma casquinha dourada e irresistível.`;
+const pao=(id,n,pr,img,top,p)=>({id,cat:'paes',n,pr,img,top,d:'Recheado com 100 g de '+p+', blend de queijo e pasta de alho da casa.',full:PA(p),sp:[['Tamanho','15 cm'],['Proteína','100 g de '+p],['Queijo','Blend de queijo'],['Finalização','Levemente gratinado']]});
 const P=[
 pao('maminha','Maminha',37.5,'maminha',1,'maminha'),
 pao('camarao','Camarão',40,'camarao',1,'camarão'),
@@ -22,14 +22,16 @@ pao('coracao','Coração de galinha',35,'coracao',0,'coração de galinha'),
 pao('linguica','Linguiça',35,'linguica',0,'linguiça'),
 {id:'smash',cat:'smash',n:'Smash',pr:25,img:'smash',top:2,d:'Burger prensado com queijo cheddar derretido em pão brioche especial.',full:'Simples e delicioso! Burger prensado com queijo cheddar derretido em um maravilhoso pão brioche especial.',sp:[['Pão','Brioche'],['Carne','Smash 90 g'],['Queijo','Cheddar']]},
 {id:'double',cat:'smash',n:'Double Smash',pr:35,img:'double',d:'Duas carnes smash de 90 g com cheddar derretido no pão brioche.',full:'Duas carnes smash de 90 g cada, combinadas com queijo cheddar derretido e servidas no nosso pão brioche especial.',sp:[['Pão','Brioche'],['Carne','2 smash de 90 g'],['Queijo','Cheddar'],['Peso total','180 g']]},
-{id:'cherda',cat:'burger',n:'Cherda',pr:35,img:'cherda',d:'Carne de 180 g com o dobro de cheddar no brioche tostado com pasta de alho.',full:'Carne bovina de 180 g, com o dobro de queijo cheddar, no pão brioche levemente tostado com nossa pasta de alho da casa.',sp:[['Pão','Brioche'],['Carne','Bovina 180 g'],['Queijo','Cheddar duplo']]},
+{id:'cherda',cat:'burger',n:'Cheddar',pr:35,img:'cherda',d:'Carne de 180 g com o dobro de cheddar no brioche tostado com pasta de alho.',full:'Carne bovina de 180 g, com o dobro de queijo cheddar, no pão brioche levemente tostado com nossa pasta de alho da casa.',sp:[['Pão','Brioche'],['Carne','Bovina 180 g'],['Queijo','Cheddar duplo']]},
 {id:'gorgonzola',cat:'burger',n:'Gorgonzola',pr:35,img:'gorgonzola',d:'180 g no pão australiano com pasta de alho da casa e gorgonzola.',full:'Hambúrguer de 180 g no pão australiano, com uma leve camada da nossa pasta de alho da casa e finalizado com queijo gorgonzola.',sp:[['Pão','Australiano'],['Carne','Bovina 180 g'],['Queijo','Gorgonzola']]},
 {id:'batata',cat:'batata',n:'Batata frita com RUB DA CASA',pr:15,img:'batata',d:'Batata crocante com o RUB DA CASA.',full:'Batata frita crocante, finalizada com o RUB DA CASA para dar aquele toque especial de sabor.',sp:[['Porção','150 g']]},
 ...['Maracujá','Cupuaçu','Goiaba','Acerola','Abacaxi','Pink Limon'].map(s=>({id:'s'+s,cat:'suco',n:s,pr:10,img:'sucos',pos:'center 78%',txt:1,d:'Suco 300 ml',full:'Suco natural de '+s.toLowerCase()+', 300 ml.',sp:[['Volume','300 ml']]})),
 ...['Coca-Cola Original','Coca-Cola Zero','Guaraná','Sprite','Fanta'].map(s=>({id:'r'+s,cat:'refri',n:s,pr:8,img:'refri',txt:1,d:'Refrigerante gelado.',full:'Refrigerante '+s+'.',sp:[]}))
 ];
+const FT=x=>"Nosso pão de alho de 15 cm é recheado com generosos 100 g de "+x+", blend de queijos derretidos e nossa irresistível pasta de alho, preparada com a receita exclusiva da casa. Tudo isso envolvido em um pão levemente gratinado, com aquela casquinha dourada e crocante por fora e um recheio cremoso e cheio de sabor por dentro. Uma explosão de sabor que transforma cada mordida em uma experiência irresistível! 🤤🔥";
+Object.entries({camarao:"camarões suculentos",maminha:"maminha suculenta",coracao:"corações de galinha suculentos",linguica:"linguiça suculenta"}).forEach(([id,x])=>{P.find(p=>p.id==id).full=FT(x)});
 P.push(...P.filter(p=>['paes','smash','burger'].includes(p.cat)).map(p=>({id:'c'+p.id,cat:'combo',n:'Combo '+p.n,pr:p.pr+15+8-3,img:p.img,top:0,d:p.n+' + batata frita + refrigerante.',full:'Um lanche '+p.n+', uma batata frita com RUB DA CASA (150 g) e um refrigerante.',sp:[['Lanche',p.n],['Acompanhamento','Batata 150 g'],['Bebida','Refrigerante']]})));
-const C=[['paes','Pães de alho','Nossa categoria principal: todos com 15 cm, 100 g de proteína, blend de queijo minas e muçarela, pasta de alho da casa e finalização levemente gratinada.'],['smash','Smash Burgers'],['burger','Hambúrgueres'],['combo','Combos','Lanche + batata frita + refrigerante.'],['batata','Batatas'],['suco','Sucos','Todos com 300 ml, R$ 10,00 cada.',I.sucos,'top'],['refri','Refrigerantes','R$ 8,00 cada.',I.refri]];
+const C=[['paes','Pães de alho','Nossa categoria principal: todos com 15 cm, 100 g de proteína, blend de queijo, pasta de alho da casa e finalização levemente gratinada.'],['smash','Smash Burgers'],['burger','Hambúrgueres'],['combo','Combos','Lanche + batata frita + refrigerante.'],['batata','Batatas'],['suco','Sucos','Todos com 300 ml, R$ 10,00 cada.',I.sucos,'top'],['refri','Refrigerantes','R$ 8,00 cada.',I.refri]];
 const brl=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const $=s=>document.querySelector(s);
 const cname=k=>C.find(c=>c[0]==k)[1];
